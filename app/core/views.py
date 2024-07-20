@@ -19,6 +19,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['POST'])
     def login(self, request):
+        """ Login a user
+            Returns JWT with access token expiring in 15 minutes
+        """
         email = request.data.get('email')
         password = request.data.get('password')
         user = User.objects.filter(email=email).first()
@@ -47,3 +50,8 @@ class UserViewSet(viewsets.ModelViewSet):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
+
+    @action(detail=False, methods=['POST'])
+    def register(self, request):
+        """ Registers a user """
+        return super().create(request)
