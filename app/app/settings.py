@@ -117,7 +117,9 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':
-    ('rest_framework_simplejwt.authentication.JWTAuthentication', )
+    ('rest_framework_simplejwt.authentication.JWTAuthentication', ),
+    'DEFAULT_PAGINATION_CLASS':
+    'core.pagination.StandardResultsSetPagination',
 }
 
 SIMPLE_JWT = {
