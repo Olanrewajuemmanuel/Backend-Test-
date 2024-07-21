@@ -10,7 +10,7 @@ from .serializers import OrderSerializer
 class OrderViewSet(viewsets.ModelViewSet):
     """This viewsets handles an authenticated user's product CRUD operations
     """
-    queryset = Order.objects.all()
+    queryset = Order.objects.all().order_by('-date')
     serializer_class = OrderSerializer
     permission_classes = [
         permissions.IsAuthenticated,
