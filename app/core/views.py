@@ -25,7 +25,6 @@ class UserViewSet(viewsets.ModelViewSet):
         email = request.data.get('email')
         password = request.data.get('password')
         user = User.objects.filter(email=email).first()
-        print(user, email, password)
 
         if user is None or not user.check_password(password):
             # Email not found or password mismatch
