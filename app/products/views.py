@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
+from rest_framework.filters import SearchFilter
 from .models import Product
 from .serializers import ProductSerializer
 from core.permissions import IsAdminOrReadOnly
@@ -16,4 +18,8 @@ class ProductViewSet(viewsets.ModelViewSet):
         permissions.IsAuthenticated,
         IsAdminOrReadOnly,
     ]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    filterset_fields = ['name', 'price', 'category', 'date_added']
+    search_fields = ['name', 'price', 'category__name', 'date_added']
+    ordering_fields = ['price', 'category__name', 'date_added']
     pagination_class = LargeResultsSetPagination
