@@ -17,7 +17,7 @@ class IsAdminOrReadOnly(permissions.BasePermission):
     Custom permission to only allow admins to create and modify objects.
     """
 
-    message = 'Admin level or higher is required to update records'
+    message = 'Staff level or higher is required to update records'
 
     def has_permission(self, request, view):
         if request.method in permissions.SAFE_METHODS:
