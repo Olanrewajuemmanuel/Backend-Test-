@@ -1,8 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 from rest_framework.filters import SearchFilter
-from .models import Product
-from .serializers import ProductSerializer
+from .models import Product, ProductCategory
+from .serializers import ProductSerializer, ProductCategorySerializer
 from core.permissions import IsAdminOrReadOnly
 from core.pagination import LargeResultsSetPagination
 
@@ -22,3 +22,14 @@ class ProductViewSet(viewsets.ModelViewSet):
     search_fields = ['name', 'price', 'category__name', 'date_added']
     ordering_fields = ['price', 'category__name', 'date_added']
     pagination_class = LargeResultsSetPagination
+
+
+class ProductCategoryViewSet(viewsets.ModelViewSet):
+    """This viewsets handles Product Category actions.
+    """
+    queryset = ProductCategory.objects.all()
+    serializer_class = ProductCategorySerializer
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsAdminOrReadOnly,
+    ]
